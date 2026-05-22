@@ -5,7 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56f05f0f-f197-41bc-9dba-fff2c89c7863" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/En_clase_sidep.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Favicon.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/SHAIRO.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/SIDEP_logo1.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Asoben.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Funza_ciundad_u.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/LOGO-HMV.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Mayeutico.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Real_de_colombia.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/cenda.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/incca.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/logo-asomuna.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/lpb.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/unihorizonte.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/foto_aux_admin.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/foto_aux_contable.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/foto_marketing_digital.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/foto_programacion.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/foto_sst.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/foto_telecomunicaciones.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/slide1.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/slide2.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/slide3.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/adulto_mayor_capacitacion.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/capacitacion_jac_en_el_barrio.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/comunidad_afro_colombia.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/sidep_are_rural.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/landing_jac.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/landing_tecnico_SST.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/landing_tecnico_auxiliar_administrativo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/landing_tecnico_contable.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/landing_tecnico_markering_digital.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/landing_tecnico_programacion.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/landing_tecnico_telecomunicaciones.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +63,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vicbasti"
+  }
+}]]></component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/vicbasti/DEVwebsidep",
@@ -72,6 +114,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep\impacto_nacional" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -88,7 +133,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779420423892</updated>
-      <workItem from="1779420424999" duration="5758000" />
+      <workItem from="1779420424999" duration="9048000" />
     </task>
     <servers />
   </component>
