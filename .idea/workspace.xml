@@ -5,43 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56f05f0f-f197-41bc-9dba-fff2c89c7863" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/En_clase_sidep.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/Favicon.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/SHAIRO.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/SIDEP_logo1.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Asoben.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Funza_ciundad_u.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/LOGO-HMV.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Mayeutico.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/Real_de_colombia.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/cenda.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/incca.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/logo-asomuna.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/lpb.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/convenios_logos/unihorizonte.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/foto_aux_admin.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/foto_aux_contable.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/foto_marketing_digital.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/foto_programacion.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/foto_sst.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/foto_telecomunicaciones.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/slide1.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/slide2.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/slide3.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/adulto_mayor_capacitacion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/capacitacion_jac_en_el_barrio.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/comunidad_afro_colombia.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/assets_nacional/sidep_are_rural.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/landing_jac.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landing_tecnico_SST.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landing_tecnico_auxiliar_administrativo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landing_tecnico_contable.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landing_tecnico_markering_digital.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landing_tecnico_programacion.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landing_tecnico_telecomunicaciones.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/impacto_nacional/home_sector_publico.html" beforeDir="false" afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,25 +29,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "vicbasti"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vicbasti&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/vicbasti/DEVwebsidep",
-    "accountId": "fddf3695-b448-4eb1-8076-716ef6e7ccfb"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vicbasti/DEVwebsidep&quot;,
+    &quot;accountId&quot;: &quot;fddf3695-b448-4eb1-8076-716ef6e7ccfb&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="3E3wB19bBX9vr2NQazu5QcUKjiM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -100,7 +66,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/Victor/PycharmProjects/DEVwebsidep",
+    "last_opened_file_path": "C:/Users/Victor/PycharmProjects/DEVwebsidep/impacto_nacional/assets_nacional",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -112,6 +78,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep\impacto_nacional\assets_nacional" />
       <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -134,6 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1779420423892</updated>
       <workItem from="1779420424999" duration="9048000" />
+      <workItem from="1780024792477" duration="1985000" />
     </task>
     <servers />
   </component>
