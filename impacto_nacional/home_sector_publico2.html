@@ -208,6 +208,125 @@
       max-height: 400px;
       opacity: 1;
     }
+
+    /* ════════════════════════════════════════════════════════
+       SERVICE CARD (.service-card)
+       Tarjeta blanca con borde redondeado (1rem) y padding 1.75rem.
+       Al hacer hover:
+         - el borde transparente cambia al azul institucional (#26519F)
+         - se eleva 4px (translateY -4px)
+       Usada en la sección "Cobertura Integral – Líneas de Servicios".
+    ════════════════════════════════════════════════════════ */
+    .service-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.75rem;
+      transition: .3s;
+      border: 2px solid transparent;
+    }
+    .service-card:hover {
+      border-color: #26519F;
+      transform: translateY(-4px);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       REVEAL (.reveal / .reveal.visible)
+       Estado inicial: invisible y desplazado 30px hacia abajo.
+       El IntersectionObserver agrega .visible cuando el elemento
+       entra al viewport, disparando la transición al estado final.
+       Usado en la sección Servicios para el encabezado y las cards.
+    ════════════════════════════════════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════════════════════════════
+       ACCENT LINE CENTER (.accent-line-center)
+       Agrega una línea decorativa amarilla (60px × 4px) centrada
+       debajo del elemento mediante el pseudo-elemento ::after.
+       Se usa en los títulos H2 de secciones con encabezado centrado.
+    ════════════════════════════════════════════════════════ */
+    .accent-line-center::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #FEDF5D;
+      border-radius: 2px;
+      margin: 10px auto 0;
+    }
+    /* ════════════════════════════════════════════════════════
+       SECCIÓN PROYECTOS – ANIMACIONES DE LÍNEA DE TIEMPO
+
+       .proj-header: encabezado de la sección, fade-up al entrar
+       .proj-left / .proj-right: filas de proyecto que entran
+         desde la izquierda o derecha respectivamente
+       .proj-img: imagen de proyecto con scale inicial
+       .proj-text: bloque de texto con fade sutil
+       .proj-node: nodo del punto en la línea de tiempo,
+         rebota con @keyframes nodePop una sola vez al entrar
+       Todas las clases parten de un estado invisible y
+       transicionan al estado visible al agregar .in-view
+       (gestionado por el IntersectionObserver #proj-observer)
+    ════════════════════════════════════════════════════════ */
+
+    /* Estado inicial – invisible antes de la animación */
+    .proj-header {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+    .proj-header.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Fila que entra desde la izquierda */
+    .proj-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity .85s cubic-bezier(.4,0,.2,1), transform .85s cubic-bezier(.4,0,.2,1);
+    }
+    .proj-left.in-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Fila que entra desde la derecha */
+    .proj-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity .85s cubic-bezier(.4,0,.2,1), transform .85s cubic-bezier(.4,0,.2,1);
+    }
+    .proj-right.in-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Imagen: escala desde 0.9 → 1, ligeramente más lenta que la fila */
+    .proj-img {
+      transition-delay: .1s;
+    }
+
+    /* Texto: delay un poco mayor para efecto escalonado */
+    .proj-text {
+      transition-delay: .18s;
+    }
+
+    /* Nodo de la línea de tiempo: rebote al aparecer */
+    @keyframes nodePop {
+      0%   { transform: scale(0);   opacity: 0; }
+      60%  { transform: scale(1.35); opacity: 1; }
+      80%  { transform: scale(0.88); }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+    .proj-node {
+      opacity: 0;
+      transform: scale(0);
+    }
+    .proj-node.in-view {
+      animation: nodePop .6s cubic-bezier(.4,0,.2,1) forwards;
+      animation-delay: .35s;
+    }
   </style>
 </head>
 <body>
@@ -403,203 +522,402 @@
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       SECCIÓN PROYECTOS (TRAYECTORIA ESTRATÉGICA E IMPACTO)
+       SECCIÓN PROYECTOS (TRAYECTORIA ESTRATÉGICA E IMPACTO) — v2
        ─ id="proyectos" – ancla del menú de navegación
-       ─ Fondo: slate-50 (claro) para contrastar con el dark de otras secciones
-       ─ Estructura: header centrado + lista de proyectos (.space-y-20)
-       ─ Cada proyecto usa un grid de 2 columnas (imagen + texto)
-       ─ Proyectos alternados: algunos con bg-white y padding adicional
-       ─ Las cards-glow son observadas por IntersectionObserver (scroll reveal)
+       ─ Diseño: fondo navy oscuro con línea de tiempo vertical central
+         (visible en desktop), que conecta los 5 proyectos alternados
+       ─ Animaciones:
+           · .proj-left  → entra desde la izquierda (translateX -60px)
+           · .proj-right → entra desde la derecha  (translateX +60px)
+           · .proj-img   → escala desde 0.88 → 1 al entrar al viewport
+           · Línea de tiempo: crece en height de 0% → 100% (CSS counter)
+           · Nodo de línea de tiempo: rebota con @keyframes nodePop
+           · Imagen: zoom suave en hover (scale 1.06) con overflow hidden
+           · Etiqueta de categoría: aparece con slide-in desde abajo
+       ─ IntersectionObserver dedicado: #proj-observer en el JS
+       ─ Responsive: en mobile la línea de tiempo se oculta y los items
+         se apilan en columna única con animación fade-up simple
   ════════════════════════════════════════════════════════════════ -->
-  <section id="proyectos" class="relative z-10 bg-slate-50 text-slate-900 py-24">
-    <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
+  <section id="proyectos" class="relative z-10 overflow-hidden" style="background:#0a1628;">
 
-      <!-- Encabezado de sección centrado -->
-      <div class="text-center mb-16">
-        <h2 class="font-black text-3xl sm:text-4xl lg:text-5xl text-slate-900 mb-4" style="letter-spacing:-.02em;">
-          Trayectoria Estratégica e Impacto
+    <!-- Fondo: gradiente radial sutil centrado para profundidad -->
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(38,81,159,0.18) 0%, transparent 70%);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-28">
+
+      <!-- ── Encabezado de sección ── -->
+      <div class="text-center mb-20 proj-header">
+        <!-- Etiqueta pill superior -->
+        <span class="inline-block bg-cyan/10 border border-cyan/30 text-cyan text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-5">
+          Trayectoria e Impacto
+        </span>
+        <h2 class="font-black text-white leading-tight mb-4"
+            style="font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing:-.03em;">
+          Intervenciones que Transforman<br/>
+          <span style="color:#FEDF5D;">el Territorio Colombiano</span>
         </h2>
-        <p class="text-slate-600 max-w-2xl mx-auto text-lg">
-          Nuestra experiencia se consolida a través de intervenciones de alto impacto enfocadas en la generación de valor público y la competitividad territorial.
+        <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          Nuestra experiencia se consolida a través de proyectos de alto impacto,
+          enfocados en la generación de valor público y la competitividad territorial.
         </p>
+        <!-- Contador de proyectos -->
+        <div class="flex items-center justify-center gap-10 mt-10">
+          <div class="text-center">
+            <div class="font-black text-4xl" style="color:#FEDF5D;">5+</div>
+            <div class="text-slate-500 text-xs uppercase tracking-widest font-semibold mt-1">Proyectos activos</div>
+          </div>
+          <div class="w-px h-10 bg-white/10"></div>
+          <div class="text-center">
+            <div class="font-black text-4xl" style="color:#30B7E0;">Nacional</div>
+            <div class="text-slate-500 text-xs uppercase tracking-widest font-semibold mt-1">Cobertura</div>
+          </div>
+          <div class="w-px h-10 bg-white/10"></div>
+          <div class="text-center">
+            <div class="font-black text-4xl text-white">100%</div>
+            <div class="text-slate-500 text-xs uppercase tracking-widest font-semibold mt-1">Compromiso</div>
+          </div>
+        </div>
       </div>
 
-      <!-- Lista de proyectos con separación vertical generosa -->
-      <div class="space-y-20">
+      <!-- ══════════════════════════════════════════════════
+           LÍNEA DE TIEMPO CON PROYECTOS ALTERNADOS
+           Estructura desktop: grid 3 col [contenido | línea | contenido]
+           En mobile: columna única, la línea central se oculta
+      ══════════════════════════════════════════════════ -->
+      <div class="relative">
 
-        <!-- ── Proyecto 1: Fondo Paz ──
-             Diseño: imagen izquierda, texto derecha (columna 1/2)
-             Temática: Restauración del tejido social -->
-        <div class="grid lg:grid-cols-2 gap-10 items-center">
-          <!-- Imagen del proyecto con borde gris claro -->
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=800&q=80"
-                 alt="Proyecto Fondo Paz"
-                 class="w-full h-72 object-cover" />
+        <!-- Línea vertical central (solo desktop) -->
+        <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+             style="background: linear-gradient(to bottom, transparent, rgba(48,183,224,0.3) 10%, rgba(48,183,224,0.3) 90%, transparent);">
+          <!-- Línea animada que crece con scroll -->
+          <div id="timeline-line"
+               style="width:1px; height:0%; background: linear-gradient(to bottom, #FEDF5D, #30B7E0); transition: height 1.4s cubic-bezier(.4,0,.2,1); position:absolute; top:0; left:0;"></div>
+        </div>
+
+        <!-- ══════════════════════════════════
+             PROYECTO 1 – Fondo Paz
+             Posición: IZQUIERDA
+        ══════════════════════════════════ -->
+        <div class="proj-row proj-left lg:grid lg:grid-cols-[1fr_80px_1fr] gap-0 items-center mb-24">
+
+          <!-- Columna izquierda: imagen -->
+          <div class="proj-img lg:pr-10 mb-6 lg:mb-0">
+            <div class="relative rounded-2xl overflow-hidden group"
+                 style="box-shadow: 0 24px 60px rgba(0,0,0,0.4);">
+              <!-- Overlay de color al hacer hover -->
+              <div class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                   style="background: linear-gradient(135deg, rgba(38,81,159,0.5), rgba(48,183,224,0.2));"></div>
+              <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=800&q=80"
+                   alt="Proyecto Fondo Paz"
+                   class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" />
+              <!-- Badge sobre imagen -->
+              <div class="absolute bottom-4 left-4 z-20">
+                <span class="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                      style="background:rgba(38,81,159,0.85); color:#FEDF5D; backdrop-filter:blur(8px); border:1px solid rgba(254,223,93,0.3);">
+                  🕊️ Paz &amp; Convivencia
+                </span>
+              </div>
+            </div>
           </div>
-          <!-- Contenido textual del proyecto -->
-          <div>
-            <!-- Etiqueta temática en color institucional -->
-            <span class="text-sm font-bold text-blue uppercase tracking-widest block mb-2">Restauración del Tejido Social</span>
-            <h3 class="text-3xl font-black text-slate-900 mb-4">Fondo Paz: Sembradores de Convivencia</h3>
-            <p class="text-slate-600 text-lg leading-relaxed mb-6">
-              Lideramos este proyecto bandera enfocado en el empoderamiento comunitario. Iniciativa específicamente diseñada para la reconstrucción del tejido social en poblaciones vulnerables, comunidades desplazadas y víctimas del conflicto, integrando formación técnica con apoyo psicosocial.
+
+          <!-- Nodo central de línea de tiempo (solo desktop) -->
+          <div class="hidden lg:flex flex-col items-center justify-center">
+            <div class="proj-node w-5 h-5 rounded-full border-2 z-10 relative"
+                 style="background:#FEDF5D; border-color:#FEDF5D; box-shadow: 0 0 0 6px rgba(254,223,93,0.15);"></div>
+          </div>
+
+          <!-- Columna derecha: texto -->
+          <div class="proj-text lg:pl-10">
+            <span class="text-xs font-black uppercase tracking-widest mb-3 block" style="color:#26519F;">
+              Restauración del Tejido Social
+            </span>
+            <h3 class="font-black text-white text-2xl sm:text-3xl mb-4 leading-snug">
+              Fondo Paz: Sembradores<br/>de Convivencia
+            </h3>
+            <p class="text-slate-400 leading-relaxed mb-6">
+              Proyecto bandera para la reconstrucción del tejido social en poblaciones vulnerables,
+              víctimas del conflicto y comunidades desplazadas. Integra formación técnica
+              con apoyo psicosocial especializado.
             </p>
+            <!-- Tags de alcance -->
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Formación técnica</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Apoyo psicosocial</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Comunidades desplazadas</span>
+            </div>
           </div>
         </div>
 
-        <!-- ── Proyecto 2: Gestión JAC ──
-             Diseño: texto izquierda (order-2 en mobile), imagen derecha (order-1 en mobile)
-             Fondo blanco con padding para destacar visualmente
-             Temática: Gobernanza comunal y Juntas de Acción Comunal -->
-        <div class="grid lg:grid-cols-2 gap-10 items-center bg-white p-8 lg:p-12 rounded-3xl shadow-sm border border-gray-100">
-          <!-- Texto: reordenado en mobile (order-2) para que la imagen aparezca primero -->
-          <div class="order-2 lg:order-1">
-            <span class="text-sm font-bold text-cyan uppercase tracking-widest block mb-2">Gobernanza Comunal</span>
-            <h3 class="text-3xl font-black text-slate-900 mb-4">Gestión Exitosa para JAC</h3>
-            <p class="text-slate-600 text-lg leading-relaxed mb-6">
-              Desarrollamos y fortalecemos módulos especializados para las Juntas de Acción Comunal (JAC) a nivel nacional, optimizando sus competencias en la formulación, presentación y gestión de proyectos para asegurar su éxito en convocatorias estatales.
+        <!-- ══════════════════════════════════
+             PROYECTO 2 – JAC
+             Posición: DERECHA
+        ══════════════════════════════════ -->
+        <div class="proj-row proj-right lg:grid lg:grid-cols-[1fr_80px_1fr] gap-0 items-center mb-24">
+
+          <!-- Columna izquierda: texto (en desktop va a la izquierda) -->
+          <div class="proj-text order-2 lg:order-1 lg:pr-10 mt-6 lg:mt-0 text-left lg:text-right">
+            <span class="text-xs font-black uppercase tracking-widest mb-3 block" style="color:#30B7E0;">
+              Gobernanza Comunal
+            </span>
+            <h3 class="font-black text-white text-2xl sm:text-3xl mb-4 leading-snug">
+              Gestión Exitosa<br/>para JAC
+            </h3>
+            <p class="text-slate-400 leading-relaxed mb-6">
+              Módulos especializados para Juntas de Acción Comunal a nivel nacional, optimizando
+              competencias en formulación, presentación y gestión de proyectos para
+              convocatorias estatales.
             </p>
-            <!-- Enlace de detalle (CTA secundario) con ícono chevron -->
-            <a href="#" class="text-blue font-bold hover:underline flex items-center gap-1">
-              Ver detalles
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
+            <div class="flex flex-wrap gap-2 lg:justify-end">
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Líderes comunales</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Gestión de proyectos</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Cobertura nacional</span>
+            </div>
           </div>
-          <!-- Imagen: reordenada en mobile (order-1) -->
-          <div class="order-1 lg:order-2 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80"
-                 alt="Juntas de Acción Comunal"
-                 class="w-full h-72 object-cover" />
+
+          <!-- Nodo central -->
+          <div class="hidden lg:flex flex-col items-center justify-center order-2">
+            <div class="proj-node w-5 h-5 rounded-full border-2 z-10 relative"
+                 style="background:#30B7E0; border-color:#30B7E0; box-shadow: 0 0 0 6px rgba(48,183,224,0.15);"></div>
+          </div>
+
+          <!-- Columna derecha: imagen -->
+          <div class="proj-img order-1 lg:order-3 lg:pl-10 mb-6 lg:mb-0">
+            <div class="relative rounded-2xl overflow-hidden group"
+                 style="box-shadow: 0 24px 60px rgba(0,0,0,0.4);">
+              <div class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                   style="background: linear-gradient(135deg, rgba(48,183,224,0.4), rgba(13,27,62,0.2));"></div>
+              <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80"
+                   alt="Juntas de Acción Comunal"
+                   class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute bottom-4 left-4 z-20">
+                <span class="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                      style="background:rgba(48,183,224,0.85); color:white; backdrop-filter:blur(8px);">
+                  🏘️ JAC Nacional
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- ── Proyecto 3: Guardianes del Agua ──
-             Diseño: imagen izquierda, texto derecha
-             Temática: Sostenibilidad y recursos hídricos -->
-        <div class="grid lg:grid-cols-2 gap-10 items-center">
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80"
-                 alt="Guardianes del Agua"
-                 class="w-full h-72 object-cover" />
+        <!-- ══════════════════════════════════
+             PROYECTO 3 – Guardianes del Agua
+             Posición: IZQUIERDA
+        ══════════════════════════════════ -->
+        <div class="proj-row proj-left lg:grid lg:grid-cols-[1fr_80px_1fr] gap-0 items-center mb-24">
+
+          <div class="proj-img lg:pr-10 mb-6 lg:mb-0">
+            <div class="relative rounded-2xl overflow-hidden group"
+                 style="box-shadow: 0 24px 60px rgba(0,0,0,0.4);">
+              <div class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                   style="background: linear-gradient(135deg, rgba(16,185,129,0.4), rgba(13,27,62,0.2));"></div>
+              <img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80"
+                   alt="Guardianes del Agua"
+                   class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute bottom-4 left-4 z-20">
+                <span class="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                      style="background:rgba(16,185,129,0.85); color:white; backdrop-filter:blur(8px);">
+                  💧 Sostenibilidad
+                </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <!-- Etiqueta en verde para tema medioambiental -->
-            <span class="text-sm font-bold text-green-600 uppercase tracking-widest block mb-2">Sostenibilidad y Recursos Hídricos</span>
-            <h3 class="text-3xl font-black text-slate-900 mb-4">Guardianes del Agua</h3>
-            <p class="text-slate-600 text-lg leading-relaxed mb-6">
-              Fortalecemos el programa de la Gobernación, liderando la formación en manejo de inventarios, gestión técnica de acueductos veredales y pedagogía para el cuidado del recurso hídrico dirigido a la comunidad.
+
+          <div class="hidden lg:flex flex-col items-center justify-center">
+            <div class="proj-node w-5 h-5 rounded-full border-2 z-10 relative"
+                 style="background:#10b981; border-color:#10b981; box-shadow: 0 0 0 6px rgba(16,185,129,0.15);"></div>
+          </div>
+
+          <div class="proj-text lg:pl-10">
+            <span class="text-xs font-black uppercase tracking-widest mb-3 block text-green-400">
+              Sostenibilidad y Recursos Hídricos
+            </span>
+            <h3 class="font-black text-white text-2xl sm:text-3xl mb-4 leading-snug">
+              Guardianes del Agua
+            </h3>
+            <p class="text-slate-400 leading-relaxed mb-6">
+              Fortalecemos el programa de la Gobernación liderando formación en manejo de inventarios,
+              gestión técnica de acueductos veredales y pedagogía comunitaria para
+              la protección del recurso hídrico.
             </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Acueductos veredales</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Pedagogía ambiental</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Gobernación</span>
+            </div>
           </div>
         </div>
 
-        <!-- ── Proyecto 4: Inteligencia Artificial 5.0 ──
-             Diseño: texto izquierda (reordenado en mobile), imagen derecha
-             Fondo blanco con padding (mismo patrón que Proyecto 2)
-             Temática: Innovación y transformación digital -->
-        <div class="grid lg:grid-cols-2 gap-10 items-center bg-white p-8 lg:p-12 rounded-3xl shadow-sm border border-gray-100">
-          <div class="order-2 lg:order-1">
-            <!-- Etiqueta en púrpura para tema tecnológico/digital -->
-            <span class="text-sm font-bold text-purple-600 uppercase tracking-widest block mb-2">Innovación y Transformación Digital</span>
-            <h3 class="text-3xl font-black text-slate-900 mb-4">Inteligencia Artificial 5.0</h3>
-            <p class="text-slate-600 text-lg leading-relaxed mb-6">
-              Orientamos programas de formación continua en Inteligencia Artificial 5.0 dirigido a funcionarios públicos y privados, garantizando la vanguardia tecnológica y optimización en los procesos administrativos.
+        <!-- ══════════════════════════════════
+             PROYECTO 4 – IA 5.0
+             Posición: DERECHA
+        ══════════════════════════════════ -->
+        <div class="proj-row proj-right lg:grid lg:grid-cols-[1fr_80px_1fr] gap-0 items-center mb-24">
+
+          <div class="proj-text order-2 lg:order-1 lg:pr-10 mt-6 lg:mt-0 text-left lg:text-right">
+            <span class="text-xs font-black uppercase tracking-widest mb-3 block text-purple-400">
+              Innovación y Transformación Digital
+            </span>
+            <h3 class="font-black text-white text-2xl sm:text-3xl mb-4 leading-snug">
+              Inteligencia<br/>Artificial 5.0
+            </h3>
+            <p class="text-slate-400 leading-relaxed mb-6">
+              Programas de formación continua en IA 5.0 para funcionarios públicos y privados,
+              garantizando la vanguardia tecnológica y la optimización de los procesos
+              administrativos institucionales.
             </p>
+            <div class="flex flex-wrap gap-2 lg:justify-end">
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Funcionarios públicos</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Transformación digital</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">IA aplicada</span>
+            </div>
           </div>
-          <div class="order-1 lg:order-2 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80"
-                 alt="IA para Procesos Administrativos"
-                 class="w-full h-72 object-cover" />
+
+          <div class="hidden lg:flex flex-col items-center justify-center order-2">
+            <div class="proj-node w-5 h-5 rounded-full border-2 z-10 relative"
+                 style="background:#a855f7; border-color:#a855f7; box-shadow: 0 0 0 6px rgba(168,85,247,0.15);"></div>
+          </div>
+
+          <div class="proj-img order-1 lg:order-3 lg:pl-10 mb-6 lg:mb-0">
+            <div class="relative rounded-2xl overflow-hidden group"
+                 style="box-shadow: 0 24px 60px rgba(0,0,0,0.4);">
+              <div class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                   style="background: linear-gradient(135deg, rgba(168,85,247,0.4), rgba(13,27,62,0.2));"></div>
+              <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80"
+                   alt="IA para Procesos Administrativos"
+                   class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute bottom-4 left-4 z-20">
+                <span class="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                      style="background:rgba(168,85,247,0.85); color:white; backdrop-filter:blur(8px);">
+                  🤖 IA 5.0
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- ── Proyecto 5: Agentes de Tránsito & Ciudadanía ──
-             Diseño: imagen izquierda, texto derecha
-             Temática: Normatividad, ciudadanía y formación rural -->
-        <div class="grid lg:grid-cols-2 gap-10 items-center">
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <img src="https://images.unsplash.com/photo-1511314545239-65a3d75c88b7?auto=format&fit=crop&w=800&q=80"
-                 alt="Agentes de Tránsito"
-                 class="w-full h-72 object-cover" />
+        <!-- ══════════════════════════════════
+             PROYECTO 5 – Agentes de Tránsito
+             Posición: IZQUIERDA
+        ══════════════════════════════════ -->
+        <div class="proj-row proj-left lg:grid lg:grid-cols-[1fr_80px_1fr] gap-0 items-center">
+
+          <div class="proj-img lg:pr-10 mb-6 lg:mb-0">
+            <div class="relative rounded-2xl overflow-hidden group"
+                 style="box-shadow: 0 24px 60px rgba(0,0,0,0.4);">
+              <div class="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                   style="background: linear-gradient(135deg, rgba(234,179,8,0.4), rgba(13,27,62,0.2));"></div>
+              <img src="https://images.unsplash.com/photo-1511314545239-65a3d75c88b7?auto=format&fit=crop&w=800&q=80"
+                   alt="Agentes de Tránsito"
+                   class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute bottom-4 left-4 z-20">
+                <span class="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                      style="background:rgba(234,179,8,0.9); color:#0D1B3E; backdrop-filter:blur(8px);">
+                  🚦 Normatividad
+                </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <!-- Etiqueta amarilla para tema normativo -->
-            <span class="text-sm font-bold text-yellow-600 uppercase tracking-widest block mb-2">Especialización en Normatividad</span>
-            <h3 class="text-3xl font-black text-slate-900 mb-4">Agentes de Tránsito & Ciudadanía</h3>
-            <p class="text-slate-600 text-lg leading-relaxed mb-6">
-              Brindamos formación técnica y en servicio al cliente a Agentes de Tránsito a nivel nacional (Ley 1310 de 2009). Además, capacitamos a asociaciones campesinas en estructura normativa, costos, presupuestos y asociatividad.
+
+          <div class="hidden lg:flex flex-col items-center justify-center">
+            <div class="proj-node w-5 h-5 rounded-full border-2 z-10 relative"
+                 style="background:#FEDF5D; border-color:#FEDF5D; box-shadow: 0 0 0 6px rgba(254,223,93,0.15);"></div>
+          </div>
+
+          <div class="proj-text lg:pl-10">
+            <span class="text-xs font-black uppercase tracking-widest mb-3 block" style="color:#FEDF5D;">
+              Especialización en Normatividad
+            </span>
+            <h3 class="font-black text-white text-2xl sm:text-3xl mb-4 leading-snug">
+              Agentes de Tránsito<br/>&amp; Ciudadanía
+            </h3>
+            <p class="text-slate-400 leading-relaxed mb-6">
+              Formación técnica para Agentes de Tránsito a nivel nacional (Ley 1310 de 2009)
+              y capacitación a asociaciones campesinas en estructura normativa,
+              costos, presupuestos y asociatividad.
             </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Ley 1310 / 2009</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Asociaciones campesinas</span>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Formación nacional</span>
+            </div>
           </div>
         </div>
 
-      </div><!-- /space-y-20 -->
-    </div>
+      </div><!-- /relative (timeline wrapper) -->
+    </div><!-- /container -->
   </section>
 
   <!-- ════════════════════════════════════════════════════════════════
-       SECCIÓN SERVICIOS (SEIS LÍNEAS DE SERVICIO ESTRATÉGICAS)
+       SECCIÓN SERVICIOS (COBERTURA INTEGRAL – LÍNEAS DE SERVICIOS)
        ─ id="servicios" – ancla del menú de navegación
-       ─ Fondo: blanco con separador superior gris claro
-       ─ Estructura: encabezado centrado + grid 3 columnas (lg+)
-       ─ Cada card tiene: número identificador, título y descripción
-       ─ Numeración coloreada individualmente para diferenciar las líneas
+       ─ Fondo: blanco
+       ─ Estructura: encabezado centrado con etiqueta + título + descripción,
+         seguido de un grid de 6 service-cards con emoji, título y descripción
+       ─ Clase .service-card: definida en el <style> del <head>;
+         aplica hover con borde azul institucional y elevación (translateY -4px)
+       ─ Clase .reveal: animación de entrada por scroll (IntersectionObserver en JS)
+       ─ transition-delay escalonado en las cards para efecto stagger visual
   ════════════════════════════════════════════════════════════════ -->
-  <section id="servicios" class="relative z-10 bg-white py-24 border-t border-gray-100">
+  <section id="servicios" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
 
-      <!-- Encabezado de la sección -->
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="font-black text-3xl sm:text-4xl text-slate-900 mb-6">Seis Líneas de Servicio Estratégicas</h2>
-        <p class="text-slate-600 text-lg leading-relaxed">
-          Nuestra operatividad está diseñada para cubrir todas las necesidades de profesionalización. Contamos con una red robusta de aliados, institutos de investigación y complejos universitarios para asegurar un ciclo de formación integral.
+      <!-- Encabezado de sección: etiqueta + título con subrayado amarillo + descripción -->
+      <div class="text-center mb-14 reveal">
+        <!-- Etiqueta identificadora en azul institucional -->
+        <span class="text-blue font-black text-sm uppercase tracking-widest">Cobertura Integral</span>
+        <!-- Título principal con clase accent-line-center:
+             genera un subrayado amarillo centrado de 60px vía ::after -->
+        <h2 class="font-black text-3xl sm:text-4xl text-slate-900 mt-2 accent-line-center">Líneas de Servicios</h2>
+        <!-- Descripción introductoria de la sección -->
+        <p class="text-gray-500 mt-6 max-w-xl mx-auto font-medium">
+          SIDEP ofrece soluciones educativas integrales para personas, empresas e instituciones.
         </p>
       </div>
 
-      <!-- Grid de 6 cards de servicios (3 columnas en desktop, 2 en tablet, 1 en mobile) -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Grid de 6 service-cards (3 columnas lg, 2 md, 1 mobile) -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <!-- Servicio 1: Articulación con Educación Media – color azul institucional -->
-        <div class="p-8 border border-gray-100 rounded-2xl hover:shadow-lg transition-all bg-slate-50/50">
-          <div class="w-10 h-10 bg-blue/10 rounded-full flex items-center justify-center mb-5 text-blue font-bold">1</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2">Articulación con Educación Media</h4>
-          <p class="text-slate-500 text-sm">Creando puentes sólidos entre la educación secundaria y las competencias laborales requeridas.</p>
+        <!-- Servicio 1: Articulación Educativa -->
+        <div class="service-card reveal">
+          <!-- Emoji decorativo centrado como ícono visual -->
+          <div class="text-4xl mb-3 text-center">🔗</div>
+          <h3 class="text-slate-900 font-black text-lg mb-2">Articulación Educativa</h3>
+          <p class="text-gray-500 text-sm font-medium">Integración con instituciones de educación media y superior para ampliar las oportunidades de los estudiantes.</p>
         </div>
 
-        <!-- Servicio 2: Formación Continua – color cian -->
-        <div class="p-8 border border-gray-100 rounded-2xl hover:shadow-lg transition-all bg-slate-50/50">
-          <div class="w-10 h-10 bg-cyan/10 rounded-full flex items-center justify-center mb-5 text-cyan font-bold">2</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2">Formación Continua</h4>
-          <p class="text-slate-500 text-sm">Actualización constante de conocimientos técnicos y administrativos para funcionarios.</p>
+        <!-- Servicio 2: Formación Continua – delay 80ms -->
+        <div class="service-card reveal" style="transition-delay:.08s">
+          <div class="text-4xl mb-3 text-center">📚</div>
+          <h3 class="text-slate-900 font-black text-lg mb-2">Formación Continua</h3>
+          <p class="text-gray-500 text-sm font-medium">Actualización profesional constante para quienes ya están en el mercado laboral y buscan crecer.</p>
         </div>
 
-        <!-- Servicio 3: Escuela de Idiomas – color amarillo -->
-        <div class="p-8 border border-gray-100 rounded-2xl hover:shadow-lg transition-all bg-slate-50/50">
-          <div class="w-10 h-10 bg-yellow-600/10 rounded-full flex items-center justify-center mb-5 text-yellow-600 font-bold">3</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2">Escuela de Idiomas</h4>
-          <p class="text-slate-500 text-sm">Desarrollo de competencias bilingües para la competitividad global del talento humano.</p>
+        <!-- Servicio 3: Formación y Desarrollo Empresarial – delay 160ms -->
+        <div class="service-card reveal" style="transition-delay:.16s">
+          <div class="text-4xl mb-3 text-center">🏢</div>
+          <h3 class="text-slate-900 font-black text-lg mb-2">Formación y Desarrollo Empresarial</h3>
+          <p class="text-gray-500 text-sm font-medium">Programas in-company adaptados a las necesidades específicas de cada organización.</p>
         </div>
 
-        <!-- Servicio 4: Responsabilidad Social – color verde -->
-        <div class="p-8 border border-gray-100 rounded-2xl hover:shadow-lg transition-all bg-slate-50/50">
-          <div class="w-10 h-10 bg-green-600/10 rounded-full flex items-center justify-center mb-5 text-green-600 font-bold">4</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2">Responsabilidad Social</h4>
-          <p class="text-slate-500 text-sm">Intervenciones que generan impacto positivo y directo en las comunidades vulnerables.</p>
+        <!-- Servicio 4: Centro de Idiomas – delay 240ms -->
+        <div class="service-card reveal" style="transition-delay:.24s">
+          <div class="text-4xl mb-3 text-center">🌍</div>
+          <h3 class="text-slate-900 font-black text-lg mb-2">Centro de Idiomas</h3>
+          <p class="text-gray-500 text-sm font-medium">Inglés y otros idiomas con metodologías comunicativas orientadas al entorno laboral y profesional.</p>
         </div>
 
-        <!-- Servicio 5: Sostenibilidad – color púrpura -->
-        <div class="p-8 border border-gray-100 rounded-2xl hover:shadow-lg transition-all bg-slate-50/50">
-          <div class="w-10 h-10 bg-purple-600/10 rounded-full flex items-center justify-center mb-5 text-purple-600 font-bold">5</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2">Sostenibilidad</h4>
-          <p class="text-slate-500 text-sm">Gestión ambiental, recursos hídricos y promoción del desarrollo territorial sostenible.</p>
+        <!-- Servicio 5: Responsabilidad Social – delay 320ms -->
+        <div class="service-card reveal" style="transition-delay:.32s">
+          <div class="text-4xl mb-3 text-center">🤝</div>
+          <h3 class="text-slate-900 font-black text-lg mb-2">Responsabilidad Social</h3>
+          <p class="text-gray-500 text-sm font-medium">Programas educativos con impacto social para comunidades vulnerables y poblaciones especiales.</p>
         </div>
 
-        <!-- Servicio 6: Empleabilidad – color rojo -->
-        <div class="p-8 border border-gray-100 rounded-2xl hover:shadow-lg transition-all bg-slate-50/50">
-          <div class="w-10 h-10 bg-red-600/10 rounded-full flex items-center justify-center mb-5 text-red-600 font-bold">6</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2">Empleabilidad</h4>
-          <p class="text-slate-500 text-sm">Conexión directa entre la capacitación técnica y las oportunidades laborales reales.</p>
+        <!-- Servicio 6: Sostenibilidad Social, Empresarial y Ambiental – delay 400ms -->
+        <div class="service-card reveal" style="transition-delay:.40s">
+          <div class="text-4xl mb-3 text-center">🌱</div>
+          <h3 class="text-slate-900 font-black text-lg mb-2">Sostenibilidad Social, Empresarial y Ambiental</h3>
+          <p class="text-gray-500 text-sm font-medium">Formación orientada al desarrollo sostenible, economía circular y gestión ambiental responsable.</p>
         </div>
 
       </div><!-- /grid servicios -->
@@ -820,6 +1138,63 @@
         observer.observe(el);
       }
     });
+
+    // ──────────────────────────────────────────────────────────────
+    // SCROLL REVEAL PARA .reveal (SECCIÓN DE SERVICIOS)
+    // La sección "Cobertura Integral – Líneas de Servicios" usa la
+    // clase .reveal (patrón de index.html) en lugar de .card-glow.
+    // Este segundo observer maneja opacity/transform vía clase CSS:
+    // el estado inicial es opacity:0 + translateY(30px) (en el <style>)
+    // y al agregar .visible se transiciona al estado visible.
+    // ──────────────────────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target); // Solo anima una vez
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ──────────────────────────────────────────────────────────────
+    // OBSERVER DE PROYECTOS (LÍNEA DE TIEMPO)
+    // Gestiona las animaciones de la sección Trayectoria e Impacto:
+    //   - .proj-header, .proj-left, .proj-right, .proj-node
+    //     reciben la clase .in-view al entrar al viewport (threshold 15%)
+    //   - La línea vertical (#timeline-line) crece de 0% a 100% en height
+    //     cuando su sección contenedora entra al viewport (threshold 5%)
+    //   - Cada observer se desuscribe tras la primera activación
+    // ──────────────────────────────────────────────────────────────
+    const projObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          // Los nodos de la línea de tiempo están dentro de .proj-row,
+          // se activan junto con la fila usando querySelectorAll interno
+          e.target.querySelectorAll('.proj-node').forEach(node => node.classList.add('in-view'));
+          projObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    // Observa el encabezado y cada fila de proyecto
+    document.querySelectorAll('.proj-header, .proj-row').forEach(el => projObserver.observe(el));
+
+    // Activa el crecimiento de la línea vertical cuando la sección entra al viewport
+    const timelineLine = document.getElementById('timeline-line');
+    if (timelineLine) {
+      const lineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            // Retraso pequeño para que arranque después de que la sección sea visible
+            setTimeout(() => { timelineLine.style.height = '100%'; }, 300);
+            lineObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      lineObserver.observe(timelineLine.closest('section'));
+    }
   </script>
 
 </body>
