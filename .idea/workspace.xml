@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56f05f0f-f197-41bc-9dba-fff2c89c7863" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico4.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/impacto_nacional/home_sector_publico.html" beforeDir="false" afterPath="$PROJECT_DIR$/impacto_nacional/home_sector_publico.html" afterDir="false" />
     </list>
@@ -66,7 +67,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/Victor/PycharmProjects/DEVwebsidep/impacto_nacional/assets_nacional",
+    "last_opened_file_path": "C:/Users/Victor/PycharmProjects/DEVwebsidep/impacto_nacional",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,6 +79,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep\impacto_nacional" />
       <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep\impacto_nacional\assets_nacional" />
       <recent name="C:\Users\Victor\PycharmProjects\DEVwebsidep" />
     </key>
@@ -101,7 +103,7 @@
       <option name="presentableId" value="Default" />
       <updated>1779420423892</updated>
       <workItem from="1779420424999" duration="9048000" />
-      <workItem from="1780024792477" duration="1985000" />
+      <workItem from="1780024792477" duration="12371000" />
     </task>
     <servers />
   </component>
