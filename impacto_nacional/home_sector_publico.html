@@ -327,6 +327,21 @@
       animation: nodePop .6s cubic-bezier(.4,0,.2,1) forwards;
       animation-delay: .35s;
     }
+
+    /* ════════════════════════════════════════════════════════
+       BOTÓN CTA DE PROYECTO (.proj-cta)
+       Pastilla con fondo translúcido del color temático de cada
+       proyecto. La flecha SVG interna avanza 4px al hacer hover
+       gracias a la transición de gap (hover:gap-3 → de 8px a 12px).
+       Cada proyecto usa su propio color: amarillo, cian, verde,
+       púrpura o amarillo según la temática visual de la fila.
+    ════════════════════════════════════════════════════════ */
+    .proj-cta {
+      transition: gap .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+    .proj-cta:hover {
+      box-shadow: 0 4px 20px rgba(255,255,255,0.06);
+    }
   </style>
 </head>
 <body>
@@ -640,11 +655,19 @@
               con apoyo psicosocial especializado.
             </p>
             <!-- Tags de alcance -->
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 mb-6">
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Formación técnica</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Apoyo psicosocial</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Comunidades desplazadas</span>
             </div>
+            <!-- CTA – enlace a la página del proyecto (reemplaza # con la ruta real) -->
+            <a href="#" class="proj-cta inline-flex items-center gap-2 font-black text-sm px-5 py-2.5 rounded-full transition-all duration-300 hover:gap-3"
+               style="background:rgba(254,223,93,0.12); color:#FEDF5D; border:1px solid rgba(254,223,93,0.3);">
+              Ver proyecto
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -667,10 +690,20 @@
               competencias en formulación, presentación y gestión de proyectos para
               convocatorias estatales.
             </p>
-            <div class="flex flex-wrap gap-2 lg:justify-end">
+            <div class="flex flex-wrap gap-2 lg:justify-end mb-6">
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Líderes comunales</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Gestión de proyectos</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Cobertura nacional</span>
+            </div>
+            <!-- CTA – alineado a la derecha en desktop para mantener consistencia con el texto -->
+            <div class="flex lg:justify-end">
+              <a href="landing_jac.html" class="proj-cta inline-flex items-center gap-2 font-black text-sm px-5 py-2.5 rounded-full transition-all duration-300 hover:gap-3"
+                 style="background:rgba(48,183,224,0.12); color:#30B7E0; border:1px solid rgba(48,183,224,0.3);">
+                Ver proyecto
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -739,11 +772,19 @@
               gestión técnica de acueductos veredales y pedagogía comunitaria para
               la protección del recurso hídrico.
             </p>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 mb-6">
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Acueductos veredales</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Pedagogía ambiental</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Gobernación</span>
             </div>
+            <!-- CTA – verde para mantener coherencia con la temática ambiental -->
+            <a href="#" class="proj-cta inline-flex items-center gap-2 font-black text-sm px-5 py-2.5 rounded-full transition-all duration-300 hover:gap-3"
+               style="background:rgba(16,185,129,0.12); color:#10b981; border:1px solid rgba(16,185,129,0.3);">
+              Ver proyecto
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -765,10 +806,20 @@
               garantizando la vanguardia tecnológica y la optimización de los procesos
               administrativos institucionales.
             </p>
-            <div class="flex flex-wrap gap-2 lg:justify-end">
+            <div class="flex flex-wrap gap-2 lg:justify-end mb-6">
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Funcionarios públicos</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Transformación digital</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">IA aplicada</span>
+            </div>
+            <!-- CTA – púrpura para coherencia con la temática tecnológica, alineado a la derecha en desktop -->
+            <div class="flex lg:justify-end">
+              <a href="#" class="proj-cta inline-flex items-center gap-2 font-black text-sm px-5 py-2.5 rounded-full transition-all duration-300 hover:gap-3"
+                 style="background:rgba(168,85,247,0.12); color:#a855f7; border:1px solid rgba(168,85,247,0.3);">
+                Ver proyecto
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -835,11 +886,19 @@
               y capacitación a asociaciones campesinas en estructura normativa,
               costos, presupuestos y asociatividad.
             </p>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 mb-6">
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Ley 1310 / 2009</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Asociaciones campesinas</span>
               <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.1);">Formación nacional</span>
             </div>
+            <!-- CTA – amarillo institucional para coherencia con el nodo de esta fila -->
+            <a href="#" class="proj-cta inline-flex items-center gap-2 font-black text-sm px-5 py-2.5 rounded-full transition-all duration-300 hover:gap-3"
+               style="background:rgba(254,223,93,0.12); color:#FEDF5D; border:1px solid rgba(254,223,93,0.3);">
+              Ver proyecto
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
           </div>
         </div>
 
