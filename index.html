@@ -46,6 +46,8 @@
     /* ── Card hover ── */
     .program-card { transition: transform .3s, box-shadow .3s; }
     .program-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(38,81,159,.18); }
+    /* La barra de color superior escala sutilmente al hacer hover */
+    .program-card:hover .card-bar { transform: scaleX(1.04); }
 
     /* ── Convenios ticker ── */
     .ticker-track {
@@ -270,82 +272,94 @@
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-      <!-- Card 1 -->
+      <!-- Card 1 – Auxiliar Administrativo · color #35b66f -->
       <div class="program-card bg-white rounded-2xl overflow-hidden shadow-md reveal">
+        <!-- Barra de color superior -->
+        <div class="h-1.5 w-full" style="background:#35b66f;"></div>
         <div class="h-40 overflow-hidden">
           <img src="assets/foto_aux_admin.webp" alt="Auxiliar Administrativo" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-xl">🗂️</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-xl" style="background:rgba(53,182,111,0.12);">🗂️</div>
           <h3 class="text-lg font-black text-dark mb-2">Auxiliar Administrativo</h3>
           <p class="text-gray-500 text-sm font-medium mb-3">Gestión documental, atención al cliente y procesos administrativos aplicados al mundo empresarial.</p>
-           <a href="landing_tecnico_auxiliar_administrativo.html" class="inline-flex items-center gap-1 text-primary font-black text-sm hover:gap-3 transition-all">Ver más →</a>
+          <a href="landing_tecnico_auxiliar_administrativo.html" class="inline-flex items-center gap-1 font-black text-sm hover:gap-3 transition-all" style="color:#35b66f;">Ver más →</a>
         </div>
       </div>
 
-      <!-- Card 2 -->
+      <!-- Card 2 – Auxiliar Contable · color #f0545c -->
       <div class="program-card bg-white rounded-2xl overflow-hidden shadow-md reveal">
+        <!-- Barra de color superior -->
+        <div class="h-1.5 w-full" style="background:#f0545c;"></div>
         <div class="h-40 overflow-hidden">
           <img src="assets/foto_aux_contable.webp" alt="Contabilidad" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-xl">📊</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-xl" style="background:rgba(240,84,92,0.12);">📊</div>
           <h3 class="text-lg font-black text-dark mb-2">Auxiliar Contable</h3>
           <p class="text-gray-500 text-sm font-medium mb-3">Registros contables, facturación electrónica, nómina y manejo de software contable actualizado.</p>
-          <a href="landing_tecnico_contable.html" class="inline-flex items-center gap-1 text-primary font-black text-sm hover:gap-3 transition-all">Ver más →</a>
+          <a href="landing_tecnico_contable.html" class="inline-flex items-center gap-1 font-black text-sm hover:gap-3 transition-all" style="color:#f0545c;">Ver más →</a>
         </div>
       </div>
 
-      <!-- Card 3 -->
+      <!-- Card 3 – Sistemas con Énfasis en Programación · color #54b1e3 -->
       <div class="program-card bg-white rounded-2xl overflow-hidden shadow-md reveal">
+        <!-- Barra de color superior -->
+        <div class="h-1.5 w-full" style="background:#54b1e3;"></div>
         <div class="h-40 overflow-hidden">
           <img src="assets/foto_programacion.webp" alt="Sistemas Programación" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-xl">💻</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-xl" style="background:rgba(84,177,227,0.12);">💻</div>
           <h3 class="text-lg font-black text-dark mb-2">Sistemas con Énfasis en Programación</h3>
           <p class="text-gray-500 text-sm font-medium mb-3">Lógica de programación, desarrollo web básico, bases de datos y soporte técnico informático.</p>
-          <a href="landing_tecnico_programacion.html" class="inline-flex items-center gap-1 text-primary font-black text-sm hover:gap-3 transition-all">Ver más →</a>
+          <a href="landing_tecnico_programacion.html" class="inline-flex items-center gap-1 font-black text-sm hover:gap-3 transition-all" style="color:#54b1e3;">Ver más →</a>
         </div>
       </div>
 
-      <!-- Card 4 -->
+      <!-- Card 4 – SST · color #fcb75e -->
       <div class="program-card bg-white rounded-2xl overflow-hidden shadow-md reveal">
+        <!-- Barra de color superior -->
+        <div class="h-1.5 w-full" style="background:#fcb75e;"></div>
         <div class="h-40 overflow-hidden">
           <img src="assets/foto_sst.webp" alt="SST" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-xl">🦺</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-xl" style="background:rgba(252,183,94,0.12);">🦺</div>
           <h3 class="text-lg font-black text-dark mb-2">Seguridad y Salud en el Trabajo</h3>
           <p class="text-gray-500 text-sm font-medium mb-3">Normativa SST, identificación de riesgos, COPASST, planes de emergencia y SG-SST.</p>
-          <a href="landing_tecnico_SST.html" class="inline-flex items-center gap-1 text-primary font-black text-sm hover:gap-3 transition-all">Ver más →</a>
+          <a href="landing_tecnico_SST.html" class="inline-flex items-center gap-1 font-black text-sm hover:gap-3 transition-all" style="color:#fcb75e;">Ver más →</a>
         </div>
       </div>
 
-      <!-- Card 5 -->
+      <!-- Card 5 – Telecomunicaciones · color #1c9ab0 -->
       <div class="program-card bg-white rounded-2xl overflow-hidden shadow-md reveal">
+        <!-- Barra de color superior -->
+        <div class="h-1.5 w-full" style="background:#1c9ab0;"></div>
         <div class="h-40 overflow-hidden">
           <img src="assets/foto_telecomunicaciones.webp" alt="Telecomunicaciones" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-xl">📡</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-xl" style="background:rgba(28,154,176,0.12);">📡</div>
           <h3 class="text-lg font-black text-dark mb-2">Instalación y Reparación de Equipos de Telecomunicaciones</h3>
           <p class="text-gray-500 text-sm font-medium mb-3">Redes, cableado estructurado, fibra óptica y mantenimiento de equipos de comunicaciones.</p>
-          <a href="landing_tecnico_telecomunicaciones.html" class="inline-flex items-center gap-1 text-primary font-black text-sm hover:gap-3 transition-all">Ver más →</a>
+          <a href="landing_tecnico_telecomunicaciones.html" class="inline-flex items-center gap-1 font-black text-sm hover:gap-3 transition-all" style="color:#1c9ab0;">Ver más →</a>
         </div>
       </div>
 
 
-      <!-- Card 6 -->
+      <!-- Card 6 – Marketing Digital · color #ed4795 -->
       <div class="program-card bg-white rounded-2xl overflow-hidden shadow-md reveal">
+        <!-- Barra de color superior -->
+        <div class="h-1.5 w-full" style="background:#ed4795;"></div>
         <div class="h-40 overflow-hidden">
           <img src="assets/foto_marketing_digital.webp" alt="Marketing Digital" class="w-full h-full object-cover hover:scale-105 transition duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-xl">📱</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 text-xl" style="background:rgba(237,71,149,0.12);">📱</div>
           <h3 class="text-lg font-black text-dark mb-2">Marketing Digital</h3>
           <p class="text-gray-500 text-sm font-medium mb-3">Estrategias digitales, redes sociales, pauta, analítica, contenidos y herramientas para posicionar marcas en entornos digitales.</p>
-          <a href="landing_tecnico_markering_digital.html" class="inline-flex items-center gap-1 text-primary font-black text-sm hover:gap-3 transition-all">Ver más →</a>
+          <a href="landing_tecnico_markering_digital.html" class="inline-flex items-center gap-1 font-black text-sm hover:gap-3 transition-all" style="color:#ed4795;">Ver más →</a>
         </div>
       </div>
 
